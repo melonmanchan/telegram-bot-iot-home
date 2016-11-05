@@ -14,7 +14,8 @@ const config = require('./config.js');
 
 const keys = Object.keys(config);
 
-const missingKeys = ['restroomBotToken', 'kitchenBotToken', 'livingRoomBotToken'].filter(key => {
+const missingKeys = ['restroomBotToken', 'kitchenBotToken',
+      'livingRoomBotToken', 'groupId'].filter(key => {
     return !keys.includes(key);
 });
 
