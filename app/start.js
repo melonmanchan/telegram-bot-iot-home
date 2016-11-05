@@ -1,4 +1,6 @@
 import { startKitchenBot } from './bots';
 import config from './lib/config';
 
-startKitchenBot({groupId: config.groupId})();
+const kitchen = startKitchenBot({groupId: config.groupId, token: config.kitchenBotToken});
+
+kitchen.start();
