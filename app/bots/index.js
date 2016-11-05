@@ -1,4 +1,7 @@
 import kitchenBot from './kitchen';
+import livingRoomBot from './livingroom';
+import restRoomBot from './restroom';
+
 import TelegramBot  from 'node-telegram-bot-api';
 import config from '../lib/config';
 
@@ -39,4 +42,16 @@ function startKitchenBot(options = { }) {
     return newBot;
 };
 
-export { startKitchenBot }
+function startRestroomBot(options = { }) {
+    const bot = startBot(options);
+    const newBot = Object.assign({}, bot, restRoomBot)
+    return newBot;
+};
+
+function startLivingRoomBot(options = { }) {
+    const bot = startBot(options);
+    const newBot = Object.assign({}, bot, livingRoomBot)
+    return newBot;
+};
+
+export { startKitchenBot, startLivingRoomBot, startRestroomBot };

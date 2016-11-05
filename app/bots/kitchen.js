@@ -1,7 +1,5 @@
-import config from '../lib/config';
-
 const kitchenBot = {
-    matcher: /\Kitchenbot (.+)/,
+    matcher: /\Kitchen (.+)/,
 
     handleMessage: function(id, message) {
         this.bot.sendMessage(id, "Kitchenbot Got:" + message + " : " + id);
