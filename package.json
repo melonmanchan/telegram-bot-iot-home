@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/melonmanchan/telegram-bot-iot-home#readme",
   "dependencies": {
+    "chalk": "^1.1.3",
+    "dateformat": "^1.0.12",
     "node-telegram-bot-api": "^0.24.0"
   },
   "devDependencies": {
