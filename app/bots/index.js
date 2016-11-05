@@ -34,6 +34,8 @@ function startBot(options = {}) {
             this.bot.onText(this.matcher, (matcher, msg) => {
                 this.onMessageGroup(msg);
             });
+
+            this.postStart();
         }
     }
 };
