@@ -1,0 +1,22 @@
+{
+  "name": "telegram-bot-iot-home",
+  "version": "0.0.1",
+  "description": "UI mockup of a IoT home interface, realized as a gorup of Telegram bots",
+  "main": "app/start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "url": "git+https://github.com/melonmanchan/telegram-bot-iot-home.git",
+    "type": "git"
+  },
+  "author": "Matti Jokitulppo <melonmanchan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/melonmanchan/telegram-bot-iot-home/issues"
+  },
+  "homepage": "https://github.com/melonmanchan/telegram-bot-iot-home#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.24.0"
+  }
+}
