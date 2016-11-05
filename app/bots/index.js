@@ -12,7 +12,9 @@ function startBot(options = {}) {
         groupId,
         token,
         onMessageGroup: function (msg) {
-            this.handleMessage(this.groupId, msg.input);
+            const message = msg.input
+            const sansPrefix = message.substr(message.indexOf(' ') + 1);
+            this.handleMessage(this.groupId, sansPrefix);
         },
 
         onMessagePrivate: function (msg) {
