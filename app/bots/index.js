@@ -8,6 +8,15 @@ function startBot(options = {}) {
     return {
         groupId,
         token,
+        onMessageGroup: function (msg) {
+            this.handleMessage(this.groupId, msg.input);
+        },
+
+        onMessagePrivate: function (msg) {
+            const fromId = msg.from.id;
+            this.handleMessage(fromId, msg.text);
+        },
+
         start: function () {
             this.bot = new TelegramBot(this.token, { polling: true });
 
