@@ -5,7 +5,8 @@
   "main": "app/start.js",
   "scripts": {
     "build": "babel app -d dist",
-    "serve": "node dist/start.js"
+    "serve": "node dist/start.js",
+    "start": "npm run build && npm run serve"
   },
   "repository": {
     "url": "git+https://github.com/melonmanchan/telegram-bot-iot-home.git",
