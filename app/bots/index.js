@@ -68,15 +68,12 @@ function startBot(options = {}) {
             let scored = availableNames.reduce((arr, name) => {
                 const score = name.score(message);
                 if (score > 0.3) {
-                    console.log(name);
-                    console.log(name.score(message));
                     arr.push({name: name, score: score});
                 }
                 return arr;
             }, []);
 
             if (scored.length != 0) {
-
                 scored.sort((a, b) => {
                     return a.score < b.score;
                 });
