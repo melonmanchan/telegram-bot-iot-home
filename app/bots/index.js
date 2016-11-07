@@ -9,6 +9,7 @@ function startBot(options = {}) {
     const { groupId, token } = options;
 
     return {
+        availableCommands: [],
         groupId,
         token,
         onMessageGroup: function (msg) {
@@ -43,10 +44,10 @@ function startBot(options = {}) {
         // Actual functionality
         showHelp: function (id) {
             const text = this.availableCommands.map(c => {
-                return c.name + "   -   " + c.description;
+                return "*" + c.name + "*" + "   -   " + c.description;
             }).join("\n");
 
-            this.bot.sendMessage(id, text);
+            this.bot.sendMessage(id, text, { parse_mode: "Markdown" });
         }
     }
 };
