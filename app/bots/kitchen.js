@@ -18,6 +18,9 @@ const kitchenBot = {
             case 'help':
                 this.showHelp(id);
                 break;
+            default:
+                this.handleUnknownCommand(id, message)
+                break;
         }
     },
 

@@ -5,6 +5,10 @@ const restRoomBot = {
             description:'Shows this listing'
         },
         {
+            name: 'help1',
+            description:'Shows this listing'
+        },
+        {
             name: 'start sauna',
             description: 'Starts the sauna'
         },
@@ -26,6 +30,9 @@ const restRoomBot = {
                 this.showHelp(id);
                 break;
             case 'start sauna':
+                break;
+            default:
+                this.handleUnknownCommand(id, message)
                 break;
         }
     },

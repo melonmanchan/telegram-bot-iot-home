@@ -1,4 +1,5 @@
 import table from 'text-table';
+import FuzzySet from 'fuzzyset.js';
 
 import kitchenBot from './kitchen';
 import livingRoomBot from './livingroom';
@@ -40,6 +41,9 @@ function startBot(options = {}) {
                 });
             });
 
+            const availableNames = this.availableCommands.map(c => { return c.name });
+            this.fuzzySet = FuzzySet(availableNames);
+
             //this.postStart();
         },
 
@@ -56,6 +60,20 @@ function startBot(options = {}) {
             const t = "`" + table(withHeading, { hsep: "  |  " }) + "`"
 
             this.bot.sendMessage(id, t, { parse_mode: "Markdown" });
+        },
+
+        handleUnknownCommand(id, message) {
+            const possibilities = this.fuzzySet.get(message);
+            let helpMessage = 'Sorry! I didn\'t quite get that!\n';
+
+            if (possibilities) {
+                console.log(possibilities)
+                const possibilityMessages = possibilities.map(p => { return "\n" + p[1] }).join("");
+                helpMessage += 'Did you mean any of the following: ' + possibilityMessages + ' \n';
+            }
+
+            helpMessage += "Type 'myname help' for full listing of commands."
+            this.bot.sendMessage(id, helpMessage);
         }
     }
 };
