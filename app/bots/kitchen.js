@@ -7,9 +7,8 @@ const kitchenBot = {
 
     postStart: function () {
         this.bot.sendMessage(this.groupId,
-           `Hi,
-            I'm your kitchen. Call me with 'Kitchen, <message>'.
-            To ask me for help, type 'Kitchen, help'.`);
+            `Hi, I'm your living room. If you need help, type 'Restroom, help'.`
+            );
     }
 };
 

@@ -7,10 +7,8 @@ const livingRoomBot = {
 
     postStart: function () {
         this.bot.sendMessage(this.groupId,
-           `Hi,
-
-            I'm your living room! Call me with 'Livingroom, <message>'.
-            To ask me for help, type 'Livingroom, help'.`);
+            `Hi, I'm your living room. If you need help, type 'Restroom, help'.`
+            );
     }
 };
 
