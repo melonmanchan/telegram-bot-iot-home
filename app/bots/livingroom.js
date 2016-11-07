@@ -11,7 +11,7 @@ const livingRoomBot = {
         },
     ],
 
-    matcher: [/\Livingroom,? (.+)/, /info/],
+    matcher: [/\Livingroom,? (.+)/i, /info/],
 
     handleMessage: function(id, message) {
         switch (message) {

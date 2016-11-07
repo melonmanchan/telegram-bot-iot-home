@@ -11,7 +11,7 @@ const kitchenBot = {
     ],
 
 
-    matcher: [ /\Kitchen,? (.+)/, /info/],
+    matcher: [ /\Kitchen,? (.+)/i, /info/],
 
     handleMessage: function(id, message) {
         switch (message) {

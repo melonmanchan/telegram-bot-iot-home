@@ -18,7 +18,7 @@ const restRoomBot = {
         },
     ],
 
-    matcher: [/\Restroom,? (.+)/, /info/],
+    matcher: [/\Restroom,? (.+)/i, /info/],
 
     handleMessage: function(id, message) {
         switch (message) {
