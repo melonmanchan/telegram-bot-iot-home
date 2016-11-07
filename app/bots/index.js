@@ -1,6 +1,4 @@
 import table from 'text-table';
-import FuzzySet from 'fuzzyset.js';
-
 import kitchenBot from './kitchen';
 import livingRoomBot from './livingroom';
 import restRoomBot from './restroom';
@@ -8,6 +6,8 @@ import restRoomBot from './restroom';
 import TelegramBot  from 'node-telegram-bot-api';
 import config from '../lib/config';
 
+require('string_score');
+console.log('hello world'.score('ow'));
 function startBot(options = {}) {
     const { groupId, token } = options;
 
@@ -41,8 +41,6 @@ function startBot(options = {}) {
                 });
             });
 
-            const availableNames = this.availableCommands.map(c => { return c.name });
-            this.fuzzySet = FuzzySet(availableNames);
 
             //this.postStart();
         },
@@ -63,12 +61,27 @@ function startBot(options = {}) {
         },
 
         handleUnknownCommand(id, message) {
-            const possibilities = this.fuzzySet.get(message);
             let helpMessage = 'Sorry! I didn\'t quite get that!\n';
 
-            if (possibilities) {
-                console.log(possibilities)
-                const possibilityMessages = possibilities.map(p => { return "\n" + p[1] }).join("");
+            const availableNames = this.availableCommands.map(c => { return c.name });
+
+            let scored = availableNames.reduce((arr, name) => {
+                const score = name.score(message);
+                if (score > 0.3) {
+                    console.log(name);
+                    console.log(name.score(message));
+                    arr.push({name: name, score: score});
+                }
+                return arr;
+            }, []);
+
+            if (scored.length != 0) {
+
+                scored.sort((a, b) => {
+                    return a.score < b.score;
+                });
+
+                const possibilityMessages = scored.map(p => { return "\n" + p.name }).join("");
                 helpMessage += 'Did you mean any of the following: ' + possibilityMessages + ' \n';
             }
 
