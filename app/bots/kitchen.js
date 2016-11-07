@@ -1,13 +1,29 @@
 const kitchenBot = {
-    matcher: /\Kitchen,? (.+)/,
+    availableCommands: [
+        {
+            name: 'help',
+            description:'Shows this listing'
+        },
+        {
+            name: 'show info',
+            description: 'Shows information about me!'
+        },
+    ],
+
+
+    matcher: [ /\Kitchen,? (.+)/, /info/],
 
     handleMessage: function(id, message) {
-        this.bot.sendMessage(id, "Kitchenbot Got:" + message + " : " + id);
+        switch (message) {
+            case 'help':
+                this.showHelp(id);
+                break;
+        }
     },
 
     postStart: function () {
         this.bot.sendMessage(this.groupId,
-            `Hi, I'm your living room. If you need help, type 'Restroom, help'.`
+            `Hi, I'm your living room. If you need help, type 'Kitchen, help'.`
             );
     }
 };

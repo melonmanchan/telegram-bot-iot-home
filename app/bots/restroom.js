@@ -1,12 +1,32 @@
 const restRoomBot = {
-    matcher: /\Restroom,? (.+)/,
+    availableCommands: [
+        {
+            name: 'help',
+            description:'Shows this listing'
+        },
+        {
+            name: 'start sauna',
+            description: 'Starts the sauna'
+        },
+        {
+            name: 'stop sauna',
+            description: 'Stops the sauna'
+        },
+        {
+            name: 'show info',
+            description: 'Shows information about me!'
+        },
+    ],
+
+    matcher: [/\Restroom,? (.+)/, /info/],
 
     handleMessage: function(id, message) {
-        this.bot.sendMessage(id, "restRoomBot Got:" + sansPrefix + " : " + id);
-
         switch (message) {
+            case 'help':
+                this.showHelp(id);
+                break;
             case 'start sauna':
-                    break;
+                break;
         }
     },
 
@@ -14,7 +34,7 @@ const restRoomBot = {
         this.bot.sendMessage(this.groupId,
             `Hi, I'm your restroom. If you need help, type 'Restroom, help'.`
         );
-    }
+    },
 };
 
 export default restRoomBot;

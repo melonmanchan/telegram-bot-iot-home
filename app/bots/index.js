@@ -31,11 +31,22 @@ function startBot(options = {}) {
                 }
             });
 
-            this.bot.onText(this.matcher, (matcher, msg) => {
-                this.onMessageGroup(msg);
+            this.matcher.map((m) => {
+                this.bot.onText(m, (matcher, msg) => {
+                    this.onMessageGroup(msg);
+                });
             });
 
             this.postStart();
+        },
+
+        // Actual functionality
+        showHelp: function (id) {
+            const text = this.availableCommands.map(c => {
+                return c.name + "   -   " + c.description;
+            }).join("\n");
+
+            this.bot.sendMessage(id, text);
         }
     }
 };
