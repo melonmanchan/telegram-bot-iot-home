@@ -1,3 +1,5 @@
+import table from 'text-table';
+
 import kitchenBot from './kitchen';
 import livingRoomBot from './livingroom';
 import restRoomBot from './restroom';
@@ -38,16 +40,20 @@ function startBot(options = {}) {
                 });
             });
 
-            this.postStart();
+            //this.postStart();
         },
 
         // Actual functionality
         showHelp: function (id) {
-            const text = this.availableCommands.map(c => {
-                return "*" + c.name + "*" + "   -   " + c.description;
-            }).join("\n");
+            const asArrays = this.availableCommands.map(c => {
+                return [ "" + c.name + "",
+                        c.description
+                ];
+            });
 
-            this.bot.sendMessage(id, text, { parse_mode: "Markdown" });
+            const t = "`" + table(asArrays, { hsep: "  |  " }) + "`"
+
+            this.bot.sendMessage(id, t, { parse_mode: "Markdown" });
         }
     }
 };
