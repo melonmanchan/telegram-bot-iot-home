@@ -51,7 +51,9 @@ function startBot(options = {}) {
                 ];
             });
 
-            const t = "`" + table(asArrays, { hsep: "  |  " }) + "`"
+            const withHeading = [['COMMAND', 'DESCRIPTION']].concat(asArrays);
+
+            const t = "`" + table(withHeading, { hsep: "  |  " }) + "`"
 
             this.bot.sendMessage(id, t, { parse_mode: "Markdown" });
         }
