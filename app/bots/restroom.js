@@ -5,10 +5,6 @@ const restRoomBot = {
             description:'Shows this listing'
         },
         {
-            name: 'help1',
-            description:'Shows this listing'
-        },
-        {
             name: 'start sauna',
             description: 'Starts the sauna'
         },
@@ -22,7 +18,9 @@ const restRoomBot = {
         },
     ],
 
-    matcher: [/\Restroom,? (.+)/i, /info/],
+    name: 'Restroom',
+
+    matcher: [/\Restroom,? (.+)/i, /^info/, /^help/],
 
     handleMessage: function(id, message) {
         switch (message) {

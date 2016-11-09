@@ -11,7 +11,9 @@ const livingRoomBot = {
         },
     ],
 
-    matcher: [/\Livingroom,? (.+)/i, /info/],
+    name: 'Livingroom',
+
+    matcher: [/\Livingroom,? (.+)/i, /^info/, /^help/],
 
     handleMessage: function(id, message) {
         switch (message) {
@@ -19,6 +21,9 @@ const livingRoomBot = {
                 this.showHelp(id);
                 break;
             case 'start sauna':
+                break;
+            default:
+                this.handleUnknownCommand(id, message)
                 break;
         }
     },

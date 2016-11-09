@@ -61,7 +61,7 @@ function startBot(options = {}) {
         },
 
         handleUnknownCommand(id, message) {
-            let helpMessage = 'Sorry! I didn\'t quite get that!\n';
+            let helpMessage = 'Sorry! I didn\'t quite understand that!\n';
 
             const availableNames = this.availableCommands.map(c => { return c.name });
 
@@ -82,7 +82,7 @@ function startBot(options = {}) {
                 helpMessage += 'Did you mean any of the following: ' + possibilityMessages + ' \n';
             }
 
-            helpMessage += "Type 'myname help' for full listing of commands."
+            helpMessage += `Type "${this.name} help" for a full list of actions`
             this.bot.sendMessage(id, helpMessage);
         }
     }

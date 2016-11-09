@@ -10,8 +10,9 @@ const kitchenBot = {
         },
     ],
 
+    name: 'Kitchen',
 
-    matcher: [ /\Kitchen,? (.+)/i, /info/],
+    matcher: [ /\Kitchen,? (.+)/i, /^info/, /^help/],
 
     handleMessage: function(id, message) {
         switch (message) {
@@ -26,7 +27,7 @@ const kitchenBot = {
 
     postStart: function () {
         this.bot.sendMessage(this.groupId,
-            `Hi, I'm your living room. If you need help, type 'Kitchen, help'.`
+            `Hi, I'm your living room. If you need help, type 'Livingroom, help'.`
             );
     }
 };
