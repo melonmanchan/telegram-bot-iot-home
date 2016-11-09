@@ -6,14 +6,27 @@ const livingRoomBot = {
             description:'Shows this listing'
         },
         {
-            name: 'show info',
-            description: 'Shows information about me!'
+            name: 'info',
+            description: 'Shows info about my current status'
+        },
+        {
+            name: 'stop tv',
+            description: 'Stops the TV'
+        },
+        {
+            name: 'start tv',
+            description: 'Starts the TV'
         },
     ],
 
     name: 'Livingroom',
 
-    matcher: [/\Livingroom,? (.+)/i, /^info/, /^help/],
+    matcher: [
+        /\Livingroom,? (.+)/i, 
+        /\L,? (.+)/i, 
+        /^info/,
+        /^help/ 
+    ],
 
     handleMessage: function(id, message) {
         switch (message) {

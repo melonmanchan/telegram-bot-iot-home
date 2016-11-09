@@ -5,14 +5,23 @@ const kitchenBot = {
             description:'Shows this listing'
         },
         {
-            name: 'show info',
-            description: 'Shows information about me!'
+            name: 'info',
+            description: 'Shows info about my current status'
+        },
+        {
+            name: 'start coffee',
+            description: 'Start the coffee maker'
         },
     ],
 
     name: 'Kitchen',
 
-    matcher: [ /\Kitchen,? (.+)/i, /^info/, /^help/],
+    matcher: [
+        /\Kitchen,? (.+)/i,
+        /\K,? (.+)/i,
+        /^info/,
+        /^help/
+    ],
 
     handleMessage: function(id, message) {
         switch (message) {

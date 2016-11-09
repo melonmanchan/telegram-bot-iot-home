@@ -13,14 +13,19 @@ const restRoomBot = {
             description: 'Stops the sauna'
         },
         {
-            name: 'show info',
-            description: 'Shows information about me!'
+            name: 'info',
+            description: 'Shows info about my current status'
         },
     ],
 
     name: 'Restroom',
 
-    matcher: [/\Restroom,? (.+)/i, /^info/, /^help/],
+    matcher: [
+        /\Restroom,? (.+)/i,
+        /\R,? (.+)/i,
+        /^info/,
+        /^help/
+    ],
 
     handleMessage: function(id, message) {
         switch (message) {
