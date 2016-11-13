@@ -87,7 +87,31 @@ const livingRoomBot = {
     },
 
     handleTVVolume: function(id, message) {
+        const messageArr = message.split(" ");
 
+        if (messageArr.length === 2) {
+            this.sendMessage(id, 'You should specify a volume amount')
+            return;
+        }
+
+        const volume = Math.floor(parseInt(messageArr[2], 10));
+
+        if (isNaN(volume)) {
+            this.sendMessage(id, `Hmm, looks like ${messageArr[2]} is not number...`)
+            return;
+        }
+
+        if (volume < 0 || volume > 100){
+            this.sendMessage(id, `Volume ${volume} is not valid. Please specify a volume between 0 and 100.`);
+            return;
+        }
+
+        this.sendMessage(id, `Ok, changing the volume to ${volume}...`);
+        this.state.volume = volume;
+
+        if (this.state.tvOn === false) {
+            this.sendMessage(id, `Please type 'Livingroom tv on' to turn on the tv`)
+        }
     },
 
     handleStartTV: function(id, message) {
