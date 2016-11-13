@@ -29,22 +29,20 @@ const restRoomBot = {
     ],
 
     handleMessage: function(id, message) {
-        switch (message) {
-            case 'help':
-                this.showHelp(id);
-                break;
-            case 'sauna on':
-            case 'sn on':
-                this.sendMessage(id, 'Ok! Starting the sauna now...')
-                break;
-            case 'sauna off':
-            case 'sn off':
-                this.sendMessage(id, 'Ok! Turning off the sauna...')
-                break;
-            default:
-                this.handleUnknownCommand(id, message)
-                break;
+
+        if (message === 'help') {
+            this.showHelp(id);
+        } else if (/^sauna on/.test(message) || /^sn on/.test(message)) {
+            this.handleSaunaOn(id, message)
+        } else if (/^sauna off/.test(message) || /^sn off/.test(message)) {
+            this.sendMessage(id, 'Ok! Turning off the sauna...')
+        } else {
+            this.handleUnknownCommand(id, message)
         }
+    },
+
+    handleSaunaOn: function(id, message) {
+        this.sendMessage(id, 'Ok! Starting the sauna now...')
     },
 
     postStart: function () {
