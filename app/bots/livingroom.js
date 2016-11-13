@@ -49,9 +49,7 @@ const livingRoomBot = {
     ],
 
     handleMessage: function(id, message) {
-        if (message === 'help') {
-            this.showHelp(id);
-        } else if (message === 'tv off') {
+        if (message === 'tv off') {
             this.handleStopTV(id, message) ;
         } else if (message === 'tv on') {
             this.handleStartTV(id, message) ;

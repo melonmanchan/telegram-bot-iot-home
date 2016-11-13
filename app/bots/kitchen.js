@@ -22,14 +22,7 @@ const kitchenBot = {
     ],
 
     handleMessage: function(id, message) {
-        switch (message) {
-            case 'help':
-                this.showHelp(id);
-                break;
-            default:
-                this.handleUnknownCommand(id, message)
-                break;
-        }
+        this.handleUnknownCommand(id, message);
     },
 
     postStart: function () {

@@ -13,6 +13,13 @@ function startBot(options = {}) {
 
     return {
         availableCommands: [],
+        defaultCommands: [{
+            name: 'lights/lgt on',
+            description: 'Turns on the lights'
+        },
+            {   name: 'lights/lgt off',
+            description: 'Turns off the lights'
+        }],
         groupId,
         token,
         onMessageGroup: function (msg) {
@@ -20,15 +27,36 @@ function startBot(options = {}) {
 
             if (message.startsWith(this.name) || message.startsWith(this.name + ',') || message.startsWith(this.shortName)) {
                 const sansPrefix = message.substr(message.indexOf(' ') + 1);
-                this.handleMessage(this.groupId, sansPrefix);
+                this.handleGeneralMessage(this.groupId, sansPrefix);
             } else {
-                this.handleMessage(this.groupId, message);
+                this.handleGeneralMessage(this.groupId, message);
             }
         },
 
         onMessagePrivate: function (msg) {
             const fromId = msg.from.id;
-            this.handleMessage(fromId, msg.text);
+            this.handleGeneralMessage(fromId, msg.text);
+        },
+
+        handleGeneralMessage: function(id, message) {
+            if (message === 'help') {
+                this.showHelp(id);
+            } else if (message === 'info') {
+                this.showInfo(id);
+            } else if (message === 'lights off' || message === 'lgt off') {
+                this.turnOffLights(id);
+            } else if (message === 'lgt on' || message === 'lights on') {
+                this.turnOnLights(id);
+            } else {
+                this.handleMessage(id, message);
+            }
+        },
+
+        turnOffLights: function(id) {
+            this.bot.sendMessage(id, 'Lights have been turned off')
+        },
+        turnOnLights: function(id) {
+            this.bot.sendMessage(id, 'Lights have been turned on')
         },
 
         start: function () {
@@ -57,7 +85,9 @@ function startBot(options = {}) {
 
         // Actual functionality
         showHelp: function (id) {
-            const asArrays = this.availableCommands.map(c => {
+            const allCommands = this.defaultCommands.concat(this.availableCommands);
+
+            const asArrays = allCommands.map(c => {
                 return [ "" + c.name + "",
                         c.description
                 ];

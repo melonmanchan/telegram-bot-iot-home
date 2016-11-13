@@ -45,9 +45,7 @@ const restRoomBot = {
     ],
 
     handleMessage: function(id, message) {
-        if (message === 'help') {
-            this.showHelp(id);
-        } else if (/^sauna on/.test(message) || /^sn on/.test(message)) {
+        if (/^sauna on/.test(message) || /^sn on/.test(message)) {
             this.handleSaunaOn(id, message)
         } else if (/^sauna temp/.test(message) || /^sn temp/.test(message)) {
             this.handleSaunaTemperature(id, message)
