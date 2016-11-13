@@ -9,8 +9,12 @@ const kitchenBot = {
             description: 'Shows info about my current status'
         },
         {
-            name: 'start coffee',
+            name: 'coffeemaker on',
             description: 'Start the coffee maker'
+        },
+        {
+            name: 'coffeemaker off',
+            description: 'Stops the coffee maker'
         },
     ],
 
@@ -18,6 +22,7 @@ const kitchenBot = {
 
     matcher: [
         /\Kitchen,? (.+)/i,
+        /\@UiKitchenBot,? (.+)/i,
         /\K,? (.+)/i,
         /^info/,
         /^help/

@@ -10,11 +10,11 @@ const livingRoomBot = {
             description: 'Shows info about my current status'
         },
         {
-            name: 'stop tv',
+            name: 'tv off',
             description: 'Stops the TV'
         },
         {
-            name: 'start tv',
+            name: 'tv on',
             description: 'Starts the TV'
         },
     ],
@@ -22,10 +22,11 @@ const livingRoomBot = {
     name: 'Livingroom',
 
     matcher: [
-        /\Livingroom,? (.+)/i, 
-        /\L,? (.+)/i, 
+        /\Livingroom,? (.+)/i,
+        /\@UiLivingRoomBot,? (.+)/i,
+        /\L,? (.+)/i,
         /^info/,
-        /^help/ 
+        /^help/
     ],
 
     handleMessage: function(id, message) {

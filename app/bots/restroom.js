@@ -5,11 +5,11 @@ const restRoomBot = {
             description:'Shows this listing'
         },
         {
-            name: 'start sauna',
+            name: 'sauna/sn on',
             description: 'Starts the sauna'
         },
         {
-            name: 'stop sauna',
+            name: 'sauna/sn off',
             description: 'Stops the sauna'
         },
         {
@@ -22,6 +22,7 @@ const restRoomBot = {
 
     matcher: [
         /\Restroom,? (.+)/i,
+        /\@UiRestRoomBot,? (.+)/i,
         /\R,? (.+)/i,
         /^info/,
         /^help/
@@ -32,7 +33,13 @@ const restRoomBot = {
             case 'help':
                 this.showHelp(id);
                 break;
-            case 'start sauna':
+            case 'sauna on':
+            case 'sn on':
+                this.sendMessage(id, 'Ok! Starting the sauna now...')
+                break;
+            case 'sauna off':
+            case 'sn off':
+                this.sendMessage(id, 'Ok! Turning off the sauna...')
                 break;
             default:
                 this.handleUnknownCommand(id, message)

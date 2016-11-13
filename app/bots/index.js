@@ -7,7 +7,7 @@ import TelegramBot  from 'node-telegram-bot-api';
 import config from '../lib/config';
 
 require('string_score');
-console.log('hello world'.score('ow'));
+
 function startBot(options = {}) {
     const { groupId, token } = options;
 
@@ -45,6 +45,11 @@ function startBot(options = {}) {
             //this.postStart();
         },
 
+        sendMessage: function(id, message) {
+            this.bot.sendMessage(id, message);
+        },
+
+
         // Actual functionality
         showHelp: function (id) {
             const asArrays = this.availableCommands.map(c => {
@@ -53,7 +58,7 @@ function startBot(options = {}) {
                 ];
             });
 
-            const withHeading = [['COMMAND', 'DESCRIPTION']].concat(asArrays);
+            const withHeading = [['ACTION', 'DESCRIPTION']].concat(asArrays);
 
             const t = "`" + table(withHeading, { hsep: "  |  " }) + "`"
 
