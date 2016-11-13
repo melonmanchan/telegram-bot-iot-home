@@ -23,6 +23,7 @@
     "dateformat": "^1.0.12",
     "fuzzyset.js": "^0.0.1",
     "node-telegram-bot-api": "^0.24.0",
+    "text-table": "^0.2.0",
     "string_score": "^0.1.22"
   },
   "devDependencies": {

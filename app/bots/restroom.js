@@ -9,6 +9,10 @@ const restRoomBot = {
             description: 'Starts the sauna'
         },
         {
+            name: 'sauna/sn temp [30-120]',
+            description: 'Sets the sauna temperature'
+        },
+        {
             name: 'sauna/sn off',
             description: 'Stops the sauna'
         },
@@ -17,6 +21,11 @@ const restRoomBot = {
             description: 'Shows info about my current status'
         },
     ],
+
+    state: {
+        saunaOn: false,
+        temperature: 80,
+    },
 
     name: 'Restroom',
 
@@ -36,7 +45,7 @@ const restRoomBot = {
         } else if (/^sauna temp/.test(message) || /^sn temp/.test(message)) {
             this.handleSaunaTemperature(id, message)
         } else if (/^sauna off/.test(message) || /^sn off/.test(message)) {
-            this.sendMessage(id, 'Ok! Turning off the sauna...')
+            this.handleSaunaOff(id, message)
         } else {
             this.handleUnknownCommand(id, message)
         }
@@ -70,9 +79,31 @@ const restRoomBot = {
         }
 
         this.sendMessage(id, `Ok! Setting sauna temperature to ${temp} celsius...`)
+        this.state.temperature = temp;
+
+        if (this.state.saunaOn === false) {
+            this.sendMessage(id, `Please type 'Restroom sauna on' to start the sauna!`)
+        }
+    },
+
+    handleSaunaOff: function (id, message) {
+        if (this.state.saunaOn === false) {
+            this.sendMessage(id, 'The sauna is already turned off');
+            this.sendMessage(id, `Type 'Restroom info' to get information abou my current status!`);
+        } else {
+            this.sendMessage(id, 'Ok! Turning off the sauna...')
+            this.state.saunaOn = false;
+        }
     },
 
     handleSaunaOn: function(id, message) {
+        if (this.state.saunaOn === true) {
+            this.sendMessage(id, `The sauna is already turned on.`);
+            this.sendMessage(id, `Type 'Restroom info' to
+                 get information abou my current status!`);
+            return;
+        }
+
         const messageArr = message.split(" ");
 
         // No timer specified...
@@ -81,9 +112,7 @@ const restRoomBot = {
         } else {
             const time = messageArr[2];
 
-            if (false) {
-
-            } else if (/\d+m$/.test(time)) {
+            if (/\d+m$/.test(time)) {
                 this.sendMessage(id, `Ok! Starting the sauna in ${time.slice(0, -1)} minutes...`);
             } else if (/\d+h$/.test(time)) {
                 this.sendMessage(id, `Ok! Starting the sauna in ${time.slice(0, -1)} hours...`);
@@ -92,6 +121,8 @@ const restRoomBot = {
                 this.sendMessage(id, 'For example, valid times (sauna on 5m) and hours (sauna on 1h).');
             }
         }
+
+        this.state.saunaOn = true;
     },
 
     postStart: function () {
