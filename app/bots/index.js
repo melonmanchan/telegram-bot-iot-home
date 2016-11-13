@@ -16,9 +16,14 @@ function startBot(options = {}) {
         groupId,
         token,
         onMessageGroup: function (msg) {
-            const message = msg.input
-            const sansPrefix = message.substr(message.indexOf(' ') + 1);
-            this.handleMessage(this.groupId, sansPrefix);
+            const message = msg.input;
+
+            if (message.startsWith(this.name) || message.startsWith(this.name + ',') || message.startsWith(this.shortName)) {
+                const sansPrefix = message.substr(message.indexOf(' ') + 1);
+                this.handleMessage(this.groupId, sansPrefix);
+            } else {
+                this.handleMessage(this.groupId, message);
+            }
         },
 
         onMessagePrivate: function (msg) {

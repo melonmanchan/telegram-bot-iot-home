@@ -6,19 +6,12 @@ const kitchenBot = {
         },
         {
             name: 'info',
-            description: 'Shows info about my current status'
-        },
-        {
-            name: 'coffeemaker on',
-            description: 'Start the coffee maker'
-        },
-        {
-            name: 'coffeemaker off',
-            description: 'Stops the coffee maker'
+            description: 'Shows info about current status'
         },
     ],
 
     name: 'Kitchen',
+    shortName: 'K',
 
     matcher: [
         /\Kitchen,? (.+)/i,

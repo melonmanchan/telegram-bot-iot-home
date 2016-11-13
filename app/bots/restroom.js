@@ -10,7 +10,7 @@ const restRoomBot = {
         },
         {
             name: 'sauna/sn temp [30-120]',
-            description: 'Sets the sauna temperature'
+            description: 'Sets sauna temperature'
         },
         {
             name: 'sauna/sn off',
@@ -18,7 +18,7 @@ const restRoomBot = {
         },
         {
             name: 'info',
-            description: 'Shows info about my current status'
+            description: 'Shows info about status'
         },
     ],
 
@@ -28,12 +28,19 @@ const restRoomBot = {
     },
 
     name: 'Restroom',
+    shortName: 'R',
 
     matcher: [
         /\Restroom,? (.+)/i,
         /\@UiRestRoomBot,? (.+)/i,
         /\R,? (.+)/i,
         /^info/,
+        /^sauna on/,
+        /^sauna off/,
+        /^sn on/,
+        /^sn off/,
+        /^sauna temp (.+)/,
+        /^sn temp (.+)/,
         /^help/
     ],
 

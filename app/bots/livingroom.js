@@ -6,7 +6,7 @@ const livingRoomBot = {
         },
         {
             name: 'info',
-            description: 'Shows info about my current status'
+            description: 'Shows info current status'
         },
         {
             name: 'tv off',
@@ -18,11 +18,11 @@ const livingRoomBot = {
         },
         {
             name: 'tv channel <number>',
-            description: 'Changes the TV to channel <number>, if on'
+            description: 'Changes the TV channel'
         },
         {
             name: 'tv volume [0, 100]',
-            description: 'Changes the TV volume to specified amount'
+            description: 'Changes the TV volume'
         },
     ],
 
@@ -33,11 +33,17 @@ const livingRoomBot = {
     },
 
     name: 'Livingroom',
+    shortName: 'L',
 
     matcher: [
         /\Livingroom,? (.+)/i,
         /\@UiLivingRoomBot,? (.+)/i,
         /\L,? (.+)/i,
+        /^info/,
+        /^tv off/,
+        /^tv on/,
+        /^tv volume(.+)/,
+        /^tv channel(.+)/,
         /^info/,
         /^help/
     ],
@@ -89,7 +95,7 @@ const livingRoomBot = {
     handleTVVolume: function(id, message) {
         const messageArr = message.split(" ");
 
-        if (messageArr.length === 2) {
+        if (messageArr.length <= 2) {
             this.sendMessage(id, 'You should specify a volume amount')
             return;
         }
