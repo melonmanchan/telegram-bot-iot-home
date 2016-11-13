@@ -33,11 +33,43 @@ const restRoomBot = {
             this.showHelp(id);
         } else if (/^sauna on/.test(message) || /^sn on/.test(message)) {
             this.handleSaunaOn(id, message)
+        } else if (/^sauna temp/.test(message) || /^sn temp/.test(message)) {
+            this.handleSaunaTemperature(id, message)
         } else if (/^sauna off/.test(message) || /^sn off/.test(message)) {
             this.sendMessage(id, 'Ok! Turning off the sauna...')
         } else {
             this.handleUnknownCommand(id, message)
         }
+    },
+
+    handleSaunaTemperature: function(id, message) {
+        const messageArr = message.split(" ");
+
+        if (messageArr.length === 2) {
+            this.sendMessage(id, 'You should specify a temperature')
+            return;
+        }
+
+        const temp = Math.floor(parseInt(messageArr[2], 10));
+
+        if (isNaN(temp)) {
+            this.sendMessage(id, `Hmm, looks like ${messageArr[2]} is not a temperature...`)
+            return;
+        }
+
+        if (temp < 30) {
+            this.sendMessage(id, `${temp} celsius is too cold for a sauna!...`)
+            this.sendMessage(id, `Maximum temperature is 120 celsius, minimum is 30`)
+            return;
+        }
+
+        if (temp > 120) {
+            this.sendMessage(id, `Whoa! ${temp} celsius way too hot!...`)
+            this.sendMessage(id, `Maximum temperature is 120 celsius, minimum is 30 celsius.`)
+            return;
+        }
+
+        this.sendMessage(id, `Ok! Setting sauna temperature to ${temp} celsius...`)
     },
 
     handleSaunaOn: function(id, message) {
