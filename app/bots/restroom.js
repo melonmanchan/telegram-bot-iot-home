@@ -29,7 +29,6 @@ const restRoomBot = {
     ],
 
     handleMessage: function(id, message) {
-
         if (message === 'help') {
             this.showHelp(id);
         } else if (/^sauna on/.test(message) || /^sn on/.test(message)) {
@@ -42,7 +41,25 @@ const restRoomBot = {
     },
 
     handleSaunaOn: function(id, message) {
-        this.sendMessage(id, 'Ok! Starting the sauna now...')
+        const messageArr = message.split(" ");
+
+        // No timer specified...
+        if (messageArr.length === 2) {
+            this.sendMessage(id, 'Ok! Starting the sauna now...')
+        } else {
+            const time = messageArr[2];
+
+            if (false) {
+
+            } else if (/\d+m$/.test(time)) {
+                this.sendMessage(id, `Ok! Starting the sauna in ${time.slice(0, -1)} minutes...`);
+            } else if (/\d+h$/.test(time)) {
+                this.sendMessage(id, `Ok! Starting the sauna in ${time.slice(0, -1)} hours...`);
+            } else {
+                this.sendMessage(id, `Sorry! I didn't understand the time ${time}.`);
+                this.sendMessage(id, 'For example, valid times (sauna on 5m) and hours (sauna on 1h).');
+            }
+        }
     },
 
     postStart: function () {
