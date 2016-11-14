@@ -1,24 +1,16 @@
 const restRoomBot = {
     availableCommands: [
         {
-            name: 'help',
-            description:'Shows this listing'
-        },
-        {
-            name: 'sauna/sn on',
+            name: 'sauna/sa on',
             description: 'Starts the sauna'
         },
         {
-            name: 'sauna/sn temp [30-120]',
+            name: 'sauna/sa temp [30-120]',
             description: 'Sets sauna temperature'
         },
         {
-            name: 'sauna/sn off',
+            name: 'sauna/sa off',
             description: 'Stops the sauna'
-        },
-        {
-            name: 'info',
-            description: 'Shows info about status'
         },
     ],
 
@@ -28,28 +20,28 @@ const restRoomBot = {
     },
 
     name: 'Restroom',
-    shortName: 'R',
+    shortName: 'RT',
 
     matcher: [
         /\Restroom,? (.+)/i,
         /\@UiRestRoomBot,? (.+)/i,
-        /\R,? (.+)/i,
+        /\RT,? (.+)/i,
         /^info/,
         /^sauna on/,
         /^sauna off/,
-        /^sn on/,
-        /^sn off/,
+        /^sa on/,
+        /^sa off/,
         /^sauna temp (.+)/,
-        /^sn temp (.+)/,
+        /^sa temp (.+)/,
         /^help/
     ],
 
     handleMessage: function(id, message) {
-        if (/^sauna on/.test(message) || /^sn on/.test(message)) {
+        if (/^sauna on/.test(message) || /^sa on/.test(message)) {
             this.handleSaunaOn(id, message)
-        } else if (/^sauna temp/.test(message) || /^sn temp/.test(message)) {
+        } else if (/^sauna temp/.test(message) || /^sa temp/.test(message)) {
             this.handleSaunaTemperature(id, message)
-        } else if (/^sauna off/.test(message) || /^sn off/.test(message)) {
+        } else if (/^sauna off/.test(message) || /^sa off/.test(message)) {
             this.handleSaunaOff(id, message)
         } else {
             this.handleUnknownCommand(id, message)
@@ -87,7 +79,8 @@ const restRoomBot = {
         this.state.temperature = temp;
 
         if (this.state.saunaOn === false) {
-            this.sendMessage(id, `Please type 'Restroom sauna on' to start the sauna!`)
+            this.state.saunaOn = true;
+            this.sendMessage(id, `Turned on the sauna...`);
         }
     },
 

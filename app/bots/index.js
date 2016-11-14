@@ -13,13 +13,22 @@ function startBot(options = {}) {
 
     return {
         availableCommands: [],
-        defaultCommands: [{
-            name: 'lights/lgt on',
-            description: 'Turns on the lights'
-        },
-            {   name: 'lights/lgt off',
-            description: 'Turns off the lights'
-        }],
+        defaultCommands: [
+            {
+                name: 'help',
+                description:'Shows this listing'
+            },
+            {
+                name: 'info',
+                description: 'Shows info current status'
+            },
+            {
+                name: 'lights/ls on',
+                description: 'Turns on the lights'
+            },
+            {   name: 'lights/ls off',
+                description: 'Turns off the lights'
+            }],
         groupId,
         token,
         onMessageGroup: function (msg) {
@@ -43,9 +52,9 @@ function startBot(options = {}) {
                 this.showHelp(id);
             } else if (message === 'info') {
                 this.showInfo(id);
-            } else if (message === 'lights off' || message === 'lgt off') {
+            } else if (message === 'lights off' || message === 'ls off') {
                 this.turnOffLights(id);
-            } else if (message === 'lgt on' || message === 'lights on') {
+            } else if (message === 'ls on' || message === 'lights on') {
                 this.turnOnLights(id);
             } else {
                 this.handleMessage(id, message);
@@ -75,7 +84,7 @@ function startBot(options = {}) {
             });
 
 
-            //this.postStart();
+            this.postStart();
         },
 
         sendMessage: function(id, message) {

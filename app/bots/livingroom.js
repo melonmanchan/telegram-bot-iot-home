@@ -1,14 +1,6 @@
 const livingRoomBot = {
     availableCommands: [
         {
-            name: 'help',
-            description:'Shows this listing'
-        },
-        {
-            name: 'info',
-            description: 'Shows info current status'
-        },
-        {
             name: 'tv off',
             description: 'Stops the TV'
         },
@@ -33,12 +25,12 @@ const livingRoomBot = {
     },
 
     name: 'Livingroom',
-    shortName: 'L',
+    shortName: 'LG',
 
     matcher: [
         /\Livingroom,? (.+)/i,
         /\@UiLivingRoomBot,? (.+)/i,
-        /\L,? (.+)/i,
+        /\LG,? (.+)/i,
         /^info/,
         /^tv off/,
         /^tv on/,
@@ -86,6 +78,7 @@ const livingRoomBot = {
         this.state.channel = channel;
 
         if (this.state.tvOn === false) {
+            this.state.tvOn = true;
             this.sendMessage(id, `Please type 'Livingroom tv on' to turn on the tv`)
         }
     },
@@ -114,7 +107,8 @@ const livingRoomBot = {
         this.state.volume = volume;
 
         if (this.state.tvOn === false) {
-            this.sendMessage(id, `Please type 'Livingroom tv on' to turn on the tv`)
+            this.state.tvOn = true;
+            this.sendMessage(id, `Turned on the TV`)
         }
     },
 

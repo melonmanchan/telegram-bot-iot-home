@@ -1,22 +1,22 @@
 const kitchenBot = {
     availableCommands: [
         {
-            name: 'help',
-            description:'Shows this listing'
+            name: 'coffee on',
+            description: 'Starts the coffee maker'
         },
         {
-            name: 'info',
-            description: 'Shows info about current status'
+            name: 'coffee off',
+            description: 'Stops the coffee maker'
         },
     ],
 
     name: 'Kitchen',
-    shortName: 'K',
+    shortName: 'KN',
 
     matcher: [
         /\Kitchen,? (.+)/i,
         /\@UiKitchenBot,? (.+)/i,
-        /\K,? (.+)/i,
+        /\KN,? (.+)/i,
         /^info/,
         /^help/
     ],
@@ -30,6 +30,7 @@ const kitchenBot = {
             `Hi, I'm your living room. If you need help, type 'Livingroom, help'.`
             );
     }
+
 };
 
 export default kitchenBot;
